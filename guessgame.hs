@@ -39,15 +39,32 @@
     I KNEW IT! Thank you.
 -}
 
-guessIt :: Int -> IO ()
-guessIt 11 = putStrLn "Wait.. I have already guessed everything! Cheater."
-guessIt s = do
-    putStrLn $ "Is your number " ++ show s ++ "? (answer \"yes\" or \"no\") "
-    guess <- getLine
-    if guess == "yes"
+-- guessIt :: Int -> IO ()
+final a = do
+    putStrLn $ "Your number is " ++ show (round (a)) ++ ", right?"
+    fnal <- getLine
+    if fnal == "yes"
         then putStrLn "I KNEW IT! Thank you."
-        else guessIt (s+1)
+        else putStrLn "You liar!!"
 
+imTired x y = do 
+    if y == "yes"
+        then putStrLn $ "Is your number " ++ show (round (x+1)) ++ " ?"
+        else putStrLn $ "Is your number " ++ show (round (x-1)) ++ " ?"
+    fnl <- getLine
+    if fnl == "yes"
+        then putStrLn "I KNEW IT! Thank you."
+        else final x
+
+guessIt n d r = do
+    putStrLn ("Is your number greater than " ++ show (round n) ++ " ?")
+    guess <- getLine
+    if r /= 9
+    then if guess == "yes"
+         then guessIt (n + (d/2)) (d/2) (r+1)
+         else guessIt (n - (d/2)) (d/2) (r+1)
+    else imTired n guess
+  
 main = do
-    putStrLn "Think of a number between 1 and 10 and I will guess it."
-    guessIt 1
+    putStrLn "Think of a number between 1 and 1000 and I will guess it."
+    guessIt 500 500 1

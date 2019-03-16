@@ -25,4 +25,12 @@
     
 -}
 
-main = putStrLn "Put your program here!"
+main = do
+    putStrLn "Please enter a string of text (the bigger the better): "
+    str <- getLine
+    putStrLn $ "You entered " ++ show str ++ "."
+    putStrLn "Now jumble it:"
+    putStrLn $ reverse str
+    let test = unwords $ map reverse $ words str
+    putStrLn $ reverse test 
+    putStrLn test

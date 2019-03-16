@@ -42,7 +42,20 @@
     Type any word and I will tell you if it is in the dictionary:
     
     *Main> 
-    
+    * import Data.Char (toLower)
+    * words <- readFile "/usr/share/dict/american-english"
+    * lines
+    * don't forget that everything doesn't have to fit inside main! 
 -}
+import Data.Char
+import Control.Monad
 
-main = putStrLn "Put your program here!"
+main = do
+    word <- readFile "/usr/share/dict/american-english"
+    putStrLn "Type any word and I will tell you if it is in the dictionary: "
+    str <- getLine
+    when (str /= "") $ do 
+        if elem str (words word) == True
+        then putStrLn $ "Yes, " ++ str ++ " is in the dictionary."
+        else putStrLn $ "No, " ++ str ++ " is not in the dictionary."
+        main

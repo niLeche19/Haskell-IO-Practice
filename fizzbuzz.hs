@@ -43,10 +43,25 @@
     * Use mapM_ with putStrLn to print the result of calling fizzBuzz.
 
 -}
-
 -- Copy your fizzBuzz function and supporting functions here
+check n f b = if n `mod` f == 0 && n `mod` b == 0 
+then "FizzBuzz"
+else if n `mod` b == 0
+then "Buzz"
+else if n `mod` f == 0 
+then "Fizz"
+else (show n)
+
+fizzBuzz n f b = [check x (toInt f)  (toInt b) | x <- [1.. (toInt n)]]
+toInt = (read :: String -> Int)
 
 
+main = do 
+    putStr "How many numbers shall we print? " 
+    n <- getLine
+    putStr "For multiples of what number shall we print 'Fizz'? "
+    f <- getLine
+    putStr "For multiples of what number shall we print 'Buzz'? "
+    b <- getLine
 
-main = putStrLn "Put your program here!"
-
+    mapM_ putStrLn $ fizzBuzz n f b
